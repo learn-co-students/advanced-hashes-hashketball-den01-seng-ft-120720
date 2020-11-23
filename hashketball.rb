@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -127,3 +128,107 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored(players_name)
+  game_hash.each do |key, values|
+    values.each do |key_2, values_2|
+      if key_2 == :players
+        values_2.each do |key_player|
+          if key_player.has_value?(players_name)
+            return key_player[:points]
+          end
+        end
+      end
+    end
+  end
+end
+
+def shoe_size(players_name)
+  game_hash.each do |key, values|
+    values.each do |key_2, values_2|
+      if key_2 == :players
+        values_2.each do |key_player|
+          if key_player.has_value?(players_name)
+            return key_player[:shoe]
+          end
+        end
+      end
+    end
+  end
+end
+
+def team_colors(team_name)
+  game_hash.each do |key, value|
+    value.each do |key_2,value_2|
+      if value_2 == team_name
+        return game_hash[key][:colors]
+      end
+    end
+  end
+end
+
+def team_names
+  teams = game_hash.each_with_object([]) do |(key,value), team_array|
+    value.each do |key_2,value_2|
+      if key_2 == :team_name
+        team_array.push(value_2)
+      end
+    end
+  end
+  teams
+end
+
+def player_numbers(team_name)
+  numbers = game_hash.each_with_object([]) do |(key,value), numbers_array|
+    value.each do |key_2, value_2|
+      if value_2 == team_name
+        game_hash[key][:players].each do |stats|
+          numbers_array.push(stats[:number])
+        end
+      end
+    end
+  end
+  numbers
+end
+
+def player_stats(player_name)
+  stats = game_hash.each_with_object([]) do |(key,value), stats_array|
+    value.each do |key_2,value_2|
+      if key_2 == :players
+        value_2.each do |player_stats|
+          if player_stats.has_value?(player_name)
+            stats_array.push(player_stats)
+          end
+        end
+      end
+    end
+  end
+  stats[0]
+end
+
+def big_shoe_rebounds
+  most_rebounds = 0
+  largest_shoe = 0
+  largest_shoe_player = ""
+  
+  game_hash.each do |key,value|
+    value.each do |key_2,value_2|
+      if key_2 == :players
+        value_2.each do |stats|
+          if stats[:shoe] > largest_shoe
+            largest_shoe = stats[:shoe]
+            most_rebounds = stats[:rebounds]
+            largest_shoe_player = stats[:player_name]
+          end
+        end
+      end
+    end
+  end
+  most_rebounds
+end
+
+
+
+
+
+
+
