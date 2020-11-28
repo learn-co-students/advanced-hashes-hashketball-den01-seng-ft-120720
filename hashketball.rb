@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -126,4 +127,93 @@ def game_hash
   }
 end
 
-# Write code here
+def num_points_scored(player_name_input)
+  game_hash.each do |key, value|
+      array_counter = 0 
+         while array_counter < value[:players].length do
+      if value[:players][array_counter][:player_name] == player_name_input
+      return value[:players][array_counter][:points]
+      end
+      array_counter+=1
+    end
+  end
+end
+
+def shoe_size(player_name_input)
+  game_hash.each do |key, value|
+      array_counter = 0 
+         while array_counter < value[:players].length do
+      if value[:players][array_counter][:player_name] == player_name_input
+      return value[:players][array_counter][:shoe]
+      end
+      array_counter+=1
+    end
+  end
+end
+
+def team_colors(team_name_input)
+  game_hash.each do |key, value|
+      array_counter = 0 
+      while array_counter < value.length do
+      if value[:team_name] == team_name_input
+      return value[:colors]
+      end
+      array_counter+=1
+    end
+  end
+end
+
+def team_names
+  team_name_array=[]
+  game_hash.each do |key, value|
+      team_name_array << value[:team_name]
+  end
+  return team_name_array
+end
+
+def player_numbers(team_name_input)
+  jersey_array=[]
+  game_hash.each do |key, value|
+      array_counter = 0 
+         while array_counter < value[:players].length do
+          if value[:team_name] == team_name_input
+           jersey_array << value[:players][array_counter][:number]
+      end
+      array_counter+=1
+    end
+  end
+ return jersey_array
+end
+
+def player_stats(player_name_input)
+  game_hash.each do |key, value|
+      array_counter = 0 
+      element_counter = 0
+         while array_counter < value[:players].length do
+      if value[:players][array_counter][:player_name] == player_name_input
+        return value[:players][array_counter]
+      end
+         array_counter+=1
+    end
+  end
+end
+
+def big_shoe_rebounds
+   largest_shoe = 0
+  game_hash.each do |key, value|
+      array_counter = 0 
+      element_counter = 0
+       while array_counter < value[:players].length do
+        if value[:players][array_counter][:shoe] > largest_shoe
+        largest_shoe = value[:players][array_counter][:shoe]
+         end
+       array_counter+=1
+      end
+    while element_counter < value[:players].length do
+      if value[:players][element_counter][:shoe] == largest_shoe
+        return value[:players][element_counter][:rebounds]
+      end
+    element_counter+=1
+  end
+end
+end
