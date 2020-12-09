@@ -191,7 +191,3 @@ def big_shoe_rebounds
   end
 total_rebounds
 end
-
-
-  
-# Write code here
